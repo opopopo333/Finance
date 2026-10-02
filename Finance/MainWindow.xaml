@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finance"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Личные финансы" Height="600" Width="1000" Closing="Window_Closing">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Button x:Name="BtnBack" Content="Назад" HorizontalAlignment="Left" Margin="5" Visibility="Hidden" Click="BtnBack_Click"/>
+            <TextBlock x:Name="TBlockTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        </Grid>
+
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" ContentRendered="MainFrame_ContentRendered"/>
+
+        <TextBlock x:Name="TBlockDateTime" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
     </Grid>
 </Window>

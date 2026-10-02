@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Finance.Services;
 
 namespace Finance
 {
@@ -23,6 +25,47 @@ namespace Finance
         public MainWindow()
         {
             InitializeComponent();
+
+            // Часы внизу окна обновляются раз в секунду
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        // Вывод текущих даты и времени
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            TBlockDateTime.Text = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+        }
+
+        // Возврат на предыдущую страницу
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.GoBack();
+        }
+
+        // Заголовок окна берётся из заголовка открытой страницы
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            Title = ((Page)e.Content).Title;
+            TBlockTitle.Text = Title;
+        }
+
+        // Кнопка «Назад» видна, только если есть куда возвращаться
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+                BtnBack.Visibility = Visibility.Visible;
+            else
+                BtnBack.Visibility = Visibility.Hidden;
+        }
+
+        // Подтверждение при закрытии окна
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!Msg.Confirm("Вы действительно хотите выйти?"))
+                e.Cancel = true;
         }
     }
 }
