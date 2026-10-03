@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\Msg.cs" />
     <Compile Include="Services\PasswordHasher.cs" />
     <Compile Include="Model1.Context.cs">
