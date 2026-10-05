@@ -88,6 +88,11 @@
     <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\Msg.cs" />
     <Compile Include="Services\PasswordHasher.cs" />
+    <Compile Include="Services\ThemeManager.cs" />
+    <Page Include="Styles\DarkTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\LightTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

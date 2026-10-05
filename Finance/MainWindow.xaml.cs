@@ -26,6 +26,9 @@ namespace Finance
         {
             InitializeComponent();
 
+            // До входа используется последняя выбранная тема
+            ThemeManager.Apply(Properties.Settings.Default.Theme);
+
             // Часы внизу окна обновляются раз в секунду
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -43,6 +46,22 @@ namespace Finance
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.GoBack();
+        }
+
+        // Переключение светлой и тёмной темы
+        private void BtnTheme_Click(object sender, RoutedEventArgs e)
+        {
+            string theme = "Light";
+            if (Properties.Settings.Default.Theme == "Light")
+                theme = "Dark";
+            ThemeManager.Apply(theme);
+
+            // У вошедшего пользователя тема сохраняется в БД
+            if (AuthService.CurrentUser != null)
+            {
+                AuthService.CurrentUser.Theme = theme;
+                Core.Context.SaveChanges();
+            }
         }
 
         // Заголовок окна берётся из заголовка открытой страницы

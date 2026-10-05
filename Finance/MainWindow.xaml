@@ -17,6 +17,9 @@
         <Grid Grid.Row="0">
             <Button x:Name="BtnBack" Content="Назад" HorizontalAlignment="Left" Visibility="Hidden" Click="BtnBack_Click"/>
             <TextBlock x:Name="TBlockTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="BtnTheme" Content="Сменить тему" Click="BtnTheme_Click"/>
+            </StackPanel>
         </Grid>
 
         <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" ContentRendered="MainFrame_ContentRendered"/>
