@@ -88,6 +88,13 @@
     <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\Msg.cs" />
     <Compile Include="Services\PasswordHasher.cs" />
+    <Page Include="Styles\LightTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="..\res\OpenSans-Regular.ttf">
+      <Link>res\OpenSans-Regular.ttf</Link>
+    </Resource>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finance"
         mc:Ignorable="d"
-        Title="Личные финансы" Height="600" Width="1000" Closing="Window_Closing">
+        Title="Личные финансы" Height="600" Width="1000" Closing="Window_Closing"
+        Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource TextBrush}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45"/>
@@ -14,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Button x:Name="BtnBack" Content="Назад" HorizontalAlignment="Left" Margin="5" Visibility="Hidden" Click="BtnBack_Click"/>
+            <Button x:Name="BtnBack" Content="Назад" HorizontalAlignment="Left" Visibility="Hidden" Click="BtnBack_Click"/>
             <TextBlock x:Name="TBlockTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
 
