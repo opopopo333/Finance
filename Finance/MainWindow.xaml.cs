@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Finance.Pages;
 using Finance.Services;
 
 namespace Finance
@@ -34,6 +35,8 @@ namespace Finance
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
+
+            MainFrame.Navigate(new AuthPage());
         }
 
         // Вывод текущих даты и времени
@@ -64,20 +67,41 @@ namespace Finance
             }
         }
 
+        // Выход из аккаунта на страницу авторизации
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Msg.Confirm("Вы действительно хотите выйти из аккаунта?"))
+                return;
+            AuthService.CurrentUser = null;
+            MainFrame.Navigate(new AuthPage());
+        }
+
         // Заголовок окна берётся из заголовка открытой страницы
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             Title = ((Page)e.Content).Title;
             TBlockTitle.Text = Title;
+
+            // После входа и выхода история очищается, чтобы «Назад» не вернул на чужую страницу
+            if (e.Content is AuthPage || e.Content is AdminPage || e.Content is UserPage)
+            {
+                while (MainFrame.CanGoBack)
+                    MainFrame.RemoveBackEntry();
+            }
         }
 
-        // Кнопка «Назад» видна, только если есть куда возвращаться
+        // Кнопка «Назад» видна, только если есть куда возвращаться, «Выйти» — только после входа
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
             if (MainFrame.CanGoBack)
                 BtnBack.Visibility = Visibility.Visible;
             else
                 BtnBack.Visibility = Visibility.Hidden;
+
+            if (AuthService.CurrentUser != null)
+                BtnLogout.Visibility = Visibility.Visible;
+            else
+                BtnLogout.Visibility = Visibility.Hidden;
         }
 
         // Подтверждение при закрытии окна

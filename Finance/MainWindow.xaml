@@ -19,6 +19,7 @@
             <TextBlock x:Name="TBlockTitle" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="BtnTheme" Content="Сменить тему" Click="BtnTheme_Click"/>
+                <Button x:Name="BtnLogout" Content="Выйти" Visibility="Hidden" Click="BtnLogout_Click"/>
             </StackPanel>
         </Grid>
 

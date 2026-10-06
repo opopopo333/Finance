@@ -1,0 +1,24 @@
+<Page x:Class="Finance.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Finance.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Авторизация">
+    <Grid>
+        <!-- Форма входа -->
+        <StackPanel x:Name="SPanelLogin" Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Логин"/>
+            <TextBox x:Name="TBoxLogin" MaxLength="50"/>
+            <Label Content="Пароль"/>
+            <PasswordBox x:Name="PBoxPassword"/>
+            <Button Content="Войти" IsDefault="True" Margin="0,15,0,5" Click="BtnLogin_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Регистрация" Click="BtnReg_Click"/>
+                <Button Content="Смена пароля" Click="BtnChangePass_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
