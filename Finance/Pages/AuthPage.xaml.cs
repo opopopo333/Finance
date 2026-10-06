@@ -21,6 +21,9 @@ namespace Finance.Pages
     /// </summary>
     public partial class AuthPage : Page
     {
+        // Количество неверных попыток входа подряд
+        private int failCount = 0;
+
         public AuthPage()
         {
             InitializeComponent();
@@ -38,15 +41,55 @@ namespace Finance.Pages
             Users user = AuthService.Login(TBoxLogin.Text.Trim(), PBoxPassword.Password);
             if (user == null)
             {
-                Msg.Warning("Неверный логин или пароль");
+                failCount++;
+                if (failCount >= 3)
+                {
+                    Msg.Warning("Три неверные попытки входа. Введите капчу");
+                    ShowCaptcha();
+                }
+                else
+                    Msg.Warning("Неверный логин или пароль");
                 return;
             }
 
+            failCount = 0;
             ThemeManager.Apply(user.Theme);
             if (user.Role == "Admin")
                 NavigationService.Navigate(new AdminPage());
             else
                 NavigationService.Navigate(new UserPage());
+        }
+
+        // Показ новой капчи вместо формы входа
+        private void ShowCaptcha()
+        {
+            TBoxCaptcha.Text = CaptchaGenerator.Generate();
+            TBoxCaptchaInput.Text = "";
+            SPanelLogin.Visibility = Visibility.Collapsed;
+            SPanelCaptcha.Visibility = Visibility.Visible;
+        }
+
+        // Верная капча возвращает форму входа, неверная заменяется новой
+        private void BtnCaptcha_Click(object sender, RoutedEventArgs e)
+        {
+            if (TBoxCaptchaInput.Text == TBoxCaptcha.Text)
+            {
+                failCount = 0;
+                SPanelCaptcha.Visibility = Visibility.Collapsed;
+                SPanelLogin.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Msg.Warning("Капча введена неверно, попробуйте ещё раз");
+                ShowCaptcha();
+            }
+        }
+
+        // Запрет копирования, вырезания и вставки в полях капчи
+        private void Captcha_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy || e.Command == ApplicationCommands.Cut || e.Command == ApplicationCommands.Paste)
+                e.Handled = true;
         }
 
         // Переход на регистрацию

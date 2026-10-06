@@ -20,5 +20,14 @@
                 <Button Content="Смена пароля" Click="BtnChangePass_Click"/>
             </StackPanel>
         </StackPanel>
+
+        <!-- Капча, появляется после 3 неверных попыток -->
+        <StackPanel x:Name="SPanelCaptcha" Width="340" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <Label Content="Введите символы с картинки"/>
+            <TextBox x:Name="TBoxCaptcha" IsReadOnly="True" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="Captcha_PreviewExecuted"
+                     Height="50" FontSize="28" FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="TBoxCaptchaInput" MaxLength="6" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="Captcha_PreviewExecuted"/>
+            <Button Content="Подтвердить" IsDefault="True" Margin="0,15,0,5" Click="BtnCaptcha_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
