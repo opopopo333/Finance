@@ -8,6 +8,22 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Регистрация">
     <Grid>
-
+        <StackPanel Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Логин"/>
+            <TextBox x:Name="TBoxLogin" MaxLength="50"/>
+            <Label Content="Пароль"/>
+            <PasswordBox x:Name="PBoxPassword"/>
+            <Label Content="Подтверждение пароля"/>
+            <PasswordBox x:Name="PBoxConfirm"/>
+            <Label Content="ФИО"/>
+            <TextBox x:Name="TBoxFIO" MaxLength="150"/>
+            <Label Content="Роль"/>
+            <!-- В Tag лежит значение для столбца Users.Role -->
+            <ComboBox x:Name="CBoxRole" SelectedIndex="0">
+                <ComboBoxItem Content="Пользователь" Tag="User"/>
+                <ComboBoxItem Content="Администратор" Tag="Admin"/>
+            </ComboBox>
+            <Button Content="Зарегистрироваться" IsDefault="True" Margin="0,15,0,5" Click="BtnReg_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

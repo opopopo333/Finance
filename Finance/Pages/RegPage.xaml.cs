@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Finance.Services;
 
 namespace Finance.Pages
 {
@@ -23,6 +24,43 @@ namespace Finance.Pages
         public RegPage()
         {
             InitializeComponent();
+        }
+
+        // Регистрация: проверка полей и сохранение нового пользователя
+        private void BtnReg_Click(object sender, RoutedEventArgs e)
+        {
+            string login = TBoxLogin.Text.Trim();
+            string fio = TBoxFIO.Text.Trim();
+
+            if (login == "" || PBoxPassword.Password == "" || PBoxConfirm.Password == "" || fio == "")
+            {
+                Msg.Warning("Заполните все поля");
+                return;
+            }
+
+            // Все ошибки собираются и выводятся одним сообщением
+            StringBuilder errors = new StringBuilder();
+            if (!AuthService.IsLoginFree(login))
+                errors.AppendLine("Пользователь с таким логином уже существует");
+            errors.Append(AuthService.CheckPassword(PBoxPassword.Password));
+            if (PBoxPassword.Password != PBoxConfirm.Password)
+                errors.AppendLine("Пароли не совпадают");
+            if (errors.Length > 0)
+            {
+                Msg.Warning(errors.ToString());
+                return;
+            }
+
+            string role = ((ComboBoxItem)CBoxRole.SelectedItem).Tag.ToString();
+            AuthService.Register(login, PBoxPassword.Password, fio, role);
+            Msg.Info("Пользователь зарегистрирован");
+
+            // Очистка формы
+            TBoxLogin.Text = "";
+            PBoxPassword.Password = "";
+            PBoxConfirm.Password = "";
+            TBoxFIO.Text = "";
+            CBoxRole.SelectedIndex = 0;
         }
     }
 }
