@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Finance.Services;
 
 namespace Finance.Pages
 {
@@ -23,6 +24,40 @@ namespace Finance.Pages
         public ChangePassPage()
         {
             InitializeComponent();
+        }
+
+        // Смена пароля: проверка полей, сохранение и возврат на авторизацию
+        private void BtnChange_Click(object sender, RoutedEventArgs e)
+        {
+            string login = TBoxLogin.Text.Trim();
+
+            if (login == "" || PBoxOld.Password == "" || PBoxNew.Password == "" || PBoxConfirm.Password == "")
+            {
+                Msg.Warning("Заполните все поля");
+                return;
+            }
+
+            // Для нового пароля те же правила, что и при регистрации
+            StringBuilder errors = new StringBuilder();
+            errors.Append(AuthService.CheckPassword(PBoxNew.Password));
+            if (PBoxNew.Password != PBoxConfirm.Password)
+                errors.AppendLine("Пароли не совпадают");
+            if (PBoxNew.Password == PBoxOld.Password)
+                errors.AppendLine("Новый пароль должен отличаться от текущего");
+            if (errors.Length > 0)
+            {
+                Msg.Warning(errors.ToString());
+                return;
+            }
+
+            if (!AuthService.ChangePassword(login, PBoxOld.Password, PBoxNew.Password))
+            {
+                Msg.Warning("Неверный логин или текущий пароль");
+                return;
+            }
+
+            Msg.Info("Пароль изменён");
+            NavigationService.Navigate(new AuthPage());
         }
     }
 }

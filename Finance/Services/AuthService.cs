@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Finance.Services
 {
-    // Вход, регистрация и текущий пользователь
+    // Вход, регистрация, смена пароля и текущий пользователь
     public static class AuthService
     {
         // Пользователь, который сейчас вошёл (null, если никто)
@@ -48,6 +48,18 @@ namespace Finance.Services
             user.Theme = "Light";
             Core.Context.Users.Add(user);
             Core.Context.SaveChanges();
+        }
+
+        // Смена пароля, false если логин или текущий пароль неверные
+        public static bool ChangePassword(string login, string oldPassword, string newPassword)
+        {
+            string oldHash = PasswordHasher.GetHash(oldPassword);
+            Users user = Core.Context.Users.FirstOrDefault(u => u.Login == login && u.Password == oldHash);
+            if (user == null)
+                return false;
+            user.Password = PasswordHasher.GetHash(newPassword);
+            Core.Context.SaveChanges();
+            return true;
         }
     }
 }
