@@ -24,5 +24,11 @@ namespace Finance.Pages
         {
             InitializeComponent();
         }
+
+        // Переход к таблице пользователей
+        private void BtnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new UsersTabPage());
+        }
     }
 }

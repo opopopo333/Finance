@@ -8,6 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Панель администратора">
     <Grid>
-
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Пользователи" Click="BtnUsers_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -84,6 +84,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Core.cs" />
+    <Compile Include="Pages\AddEditUserPage.xaml.cs">
+      <DependentUpon>AddEditUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,13 @@
     <Compile Include="Pages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UsersTabPage.xaml.cs">
+      <DependentUpon>UsersTabPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\AddEditUserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AdminPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +126,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\UserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\UsersTabPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
