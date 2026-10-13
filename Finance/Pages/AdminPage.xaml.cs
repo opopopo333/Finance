@@ -30,5 +30,11 @@ namespace Finance.Pages
         {
             NavigationService.Navigate(new UsersTabPage());
         }
+
+        // Переход к таблице категорий
+        private void BtnCategories_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CategoryTabPage());
+        }
     }
 }
