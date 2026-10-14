@@ -11,6 +11,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Content="Пользователи" Click="BtnUsers_Click"/>
             <Button Content="Категории" Click="BtnCategories_Click"/>
+            <Button Content="Операции" Click="BtnOperations_Click"/>
         </StackPanel>
     </Grid>
 </Page>

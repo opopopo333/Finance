@@ -87,6 +87,9 @@
     <Compile Include="Pages\AddEditCategoryPage.xaml.cs">
       <DependentUpon>AddEditCategoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddEditOperationPage.xaml.cs">
+      <DependentUpon>AddEditOperationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddEditUserPage.xaml.cs">
       <DependentUpon>AddEditUserPage.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,9 @@
     <Compile Include="Pages\ChangePassPage.xaml.cs">
       <DependentUpon>ChangePassPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\OperationTabPage.xaml.cs">
+      <DependentUpon>OperationTabPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +118,10 @@
       <DependentUpon>UsersTabPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\AddEditCategoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddEditOperationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -132,6 +142,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ChangePassPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OperationTabPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
