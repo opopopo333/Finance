@@ -42,5 +42,11 @@ namespace Finance.Pages
         {
             NavigationService.Navigate(new OperationTabPage());
         }
+
+        // Переход к диаграмме
+        private void BtnDiagram_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DiagramPage());
+        }
     }
 }

@@ -59,6 +59,10 @@ namespace Finance
                 theme = "Dark";
             ThemeManager.Apply(theme);
 
+            // Диаграмму из Windows Forms стили WPF не перекрашивают, делаем это вручную
+            if (MainFrame.Content is DiagramPage)
+                ((DiagramPage)MainFrame.Content).ApplyTheme();
+
             // У вошедшего пользователя тема сохраняется в БД
             if (AuthService.CurrentUser != null)
             {
