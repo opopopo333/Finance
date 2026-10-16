@@ -48,5 +48,11 @@ namespace Finance.Pages
         {
             NavigationService.Navigate(new DiagramPage());
         }
+
+        // Переход к выгрузке отчётов
+        private void BtnReports_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ReportPage());
+        }
     }
 }

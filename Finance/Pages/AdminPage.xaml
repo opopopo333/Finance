@@ -13,6 +13,7 @@
             <Button Content="Категории" Click="BtnCategories_Click"/>
             <Button Content="Операции" Click="BtnOperations_Click"/>
             <Button Content="Диаграмма" Click="BtnDiagram_Click"/>
+            <Button Content="Отчёты" Click="BtnReports_Click"/>
         </StackPanel>
     </Grid>
 </Page>
