@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Word = Microsoft.Office.Interop.Word;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Finance.Services
 {
-    // Выгрузка отчёта по пользователям в Word и PDF
+    // Выгрузка отчёта по пользователям в Word, PDF и Excel
     public static class ExportService
     {
         // Отчёт в Word: по каждому пользователю суммы по категориям, самая крупная и самая мелкая операция.
@@ -81,6 +82,81 @@ namespace Finance.Services
             {
                 // Закрываем Word без вопроса о сохранении, даже если была ошибка
                 app.Quit(Word.WdSaveOptions.wdDoNotSaveChanges);
+            }
+        }
+
+        // Отчёт в Excel: лист на каждого пользователя с его операциями и итогом формулой SUM
+        public static void ExportExcel(string path)
+        {
+            WriteExcel(path);
+            // Excel завершается, только когда .NET освободит ссылки на его объекты, поэтому вызываем сборщик мусора
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        // Создание и сохранение книги Excel
+        private static void WriteExcel(string path)
+        {
+            List<Users> users = Core.Context.Users.OrderBy(u => u.FIO).ToList();
+            Excel.Application app = new Excel.Application();
+            try
+            {
+                // Без окон с вопросами: Excel скрыт, и ответить на них некому
+                app.DisplayAlerts = false;
+
+                // В новой книге сразу нужное число листов, настройку Excel потом возвращаем
+                int oldSheetsCount = app.SheetsInNewWorkbook;
+                app.SheetsInNewWorkbook = users.Count;
+                Excel.Workbook workbook = app.Workbooks.Add();
+                app.SheetsInNewWorkbook = oldSheetsCount;
+
+                for (int i = 0; i < users.Count; i++)
+                {
+                    Users user = users[i];
+                    List<Operation> operations = Core.Context.Operation.Where(o => o.UserID == user.ID)
+                        .OrderBy(o => o.Date).ToList();
+
+                    // Лист называется логином, Excel разрешает не больше 31 символа
+                    Excel.Worksheet sheet = (Excel.Worksheet)workbook.Worksheets[i + 1];
+                    string sheetName = user.Login;
+                    if (sheetName.Length > 31)
+                        sheetName = sheetName.Substring(0, 31);
+                    sheet.Name = sheetName;
+
+                    sheet.Cells[1, 1] = "Дата";
+                    sheet.Cells[1, 2] = "Название";
+                    sheet.Cells[1, 3] = "Категория";
+                    sheet.Cells[1, 4] = "Тип";
+                    sheet.Cells[1, 5] = "Сумма";
+                    sheet.Cells[1, 6] = "Комментарий";
+                    sheet.Rows[1].Font.Bold = true;
+
+                    int row = 2;
+                    foreach (Operation operation in operations)
+                    {
+                        sheet.Cells[row, 1] = operation.Date;
+                        sheet.Cells[row, 2] = operation.Name;
+                        sheet.Cells[row, 3] = operation.Category.Name;
+                        sheet.Cells[row, 4] = operation.Category.Type;
+                        sheet.Cells[row, 5] = (double)operation.Amount;
+                        sheet.Cells[row, 6] = operation.Comment;
+                        row++;
+                    }
+
+                    // Итоговая строка формулой
+                    sheet.Cells[row, 4] = "Итого";
+                    sheet.Cells[row, 5].Formula = "=SUM(E2:E" + (row - 1) + ")";
+                    sheet.Rows[row].Font.Bold = true;
+
+                    sheet.Columns.AutoFit();
+                }
+
+                workbook.SaveAs(path);
+                workbook.Close();
+            }
+            finally
+            {
+                app.Quit();
             }
         }
     }

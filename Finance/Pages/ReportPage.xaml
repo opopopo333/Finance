@@ -11,6 +11,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Content="Отчёт в Word" Click="BtnWord_Click"/>
             <Button Content="Отчёт в PDF" Click="BtnPdf_Click"/>
+            <Button Content="Отчёт в Excel" Click="BtnExcel_Click"/>
         </StackPanel>
     </Grid>
 </Page>

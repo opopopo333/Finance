@@ -71,5 +71,22 @@ namespace Finance.Pages
                 Msg.Error("Не удалось создать отчёт. Возможно, не установлен Microsoft Word.\n" + ex.Message);
             }
         }
+
+        // Выгрузка в Excel (.xlsx)
+        private void BtnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            string path = GetSavePath("Книга Excel (*.xlsx)|*.xlsx");
+            if (path == null)
+                return;
+            try
+            {
+                ExportService.ExportExcel(path);
+                Msg.Info("Отчёт сохранён: " + path);
+            }
+            catch (Exception ex)
+            {
+                Msg.Error("Не удалось создать отчёт. Возможно, не установлен Microsoft Excel.\n" + ex.Message);
+            }
+        }
     }
 }
