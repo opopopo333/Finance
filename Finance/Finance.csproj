@@ -193,9 +193,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Resource Include="..\res\OpenSans-Regular.ttf">
-      <Link>res\OpenSans-Regular.ttf</Link>
-    </Resource>
+    <Resource Include="Fonts\OpenSans-Regular.ttf" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

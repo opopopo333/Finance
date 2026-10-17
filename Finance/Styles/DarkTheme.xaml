@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Тёмная тема (собственный словарь): основные #193D57 и #4DC6C5, дополнительные #FFFFFF и #DD4B42 -->
 
-    <FontFamily x:Key="MainFont">pack://application:,,,/res/#Open Sans</FontFamily>
+    <FontFamily x:Key="MainFont">pack://application:,,,/Fonts/#Open Sans</FontFamily>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="#4DC6C5"/>
     <SolidColorBrush x:Key="AccentBrush" Color="#4DC6C5"/>
