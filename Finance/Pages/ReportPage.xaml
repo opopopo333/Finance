@@ -9,9 +9,9 @@
       Title="Отчёты">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Отчёт в Word" Click="BtnWord_Click"/>
-            <Button Content="Отчёт в PDF" Click="BtnPdf_Click"/>
-            <Button Content="Отчёт в Excel" Click="BtnExcel_Click"/>
+            <Button Content="Отчёт в Word" Click="BtnWord_Click" ToolTip="По каждому пользователю суммы по категориям, файл .docx"/>
+            <Button Content="Отчёт в PDF" Click="BtnPdf_Click" ToolTip="Тот же отчёт Word, сохранённый в .pdf"/>
+            <Button Content="Отчёт в Excel" Click="BtnExcel_Click" ToolTip="Лист с операциями на каждого пользователя, файл .xlsx"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -18,15 +18,18 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Пользователь"/>
-                <ComboBox x:Name="CBoxUser" Width="300" DisplayMemberPath="FIO" SelectionChanged="Chart_SelectionChanged"/>
+                <ComboBox x:Name="CBoxUser" Width="300" DisplayMemberPath="FIO" SelectionChanged="Chart_SelectionChanged"
+                          ToolTip="Чьи операции показать"/>
             </StackPanel>
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Вид диаграммы"/>
-                <ComboBox x:Name="CBoxChartType" Width="180" SelectionChanged="Chart_SelectionChanged"/>
+                <ComboBox x:Name="CBoxChartType" Width="180" SelectionChanged="Chart_SelectionChanged"
+                          ToolTip="Столбцы, полосы, круг, кольцо, линия или область"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Тип операций"/>
-                <ComboBox x:Name="CBoxType" Width="120" SelectionChanged="Chart_SelectionChanged">
+                <ComboBox x:Name="CBoxType" Width="120" SelectionChanged="Chart_SelectionChanged"
+                          ToolTip="Показать доходы или расходы">
                     <ComboBoxItem Content="Доход"/>
                     <ComboBoxItem Content="Расход"/>
                 </ComboBox>

@@ -18,11 +18,13 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Поиск по названию"/>
-                <TextBox x:Name="TBoxSearch" Width="300" MaxLength="100" TextChanged="TBoxSearch_TextChanged"/>
+                <TextBox x:Name="TBoxSearch" Width="300" MaxLength="100" TextChanged="TBoxSearch_TextChanged"
+                         Tag="Например, Продукты" ToolTip="Таблица фильтруется во время ввода"/>
             </StackPanel>
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Тип"/>
-                <ComboBox x:Name="CBoxType" Width="120" SelectionChanged="Filter_SelectionChanged">
+                <ComboBox x:Name="CBoxType" Width="120" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Показать только категории доходов или расходов">
                     <ComboBoxItem Content="Все"/>
                     <ComboBoxItem Content="Доход"/>
                     <ComboBoxItem Content="Расход"/>
@@ -30,7 +32,8 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="Сортировка"/>
-                <ComboBox x:Name="CBoxSort" Width="180" SelectionChanged="Filter_SelectionChanged">
+                <ComboBox x:Name="CBoxSort" Width="180" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Порядок строк. Можно также щёлкнуть по заголовку столбца">
                     <ComboBoxItem Content="Название А–Я"/>
                     <ComboBoxItem Content="Название Я–А"/>
                 </ComboBox>
@@ -44,7 +47,7 @@
                 <DataGridTemplateColumn Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Click="BtnEdit_Click"/>
+                            <Button Content="Редактировать" Click="BtnEdit_Click" ToolTip="Изменить эту категорию"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -52,8 +55,9 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Content="Добавить" Margin="0,5,10,5" Click="BtnAdd_Click"/>
-            <Button Content="Удалить выбранные" Margin="0,5" Click="BtnDelete_Click"/>
+            <Button Content="Добавить" Margin="0,5,10,5" Click="BtnAdd_Click" ToolTip="Добавить новую категорию"/>
+            <Button Content="Удалить выбранные" Margin="0,5" Click="BtnDelete_Click"
+                    ToolTip="Удалить выделенные категории. Несколько строк выделяются с Ctrl или Shift"/>
         </StackPanel>
     </Grid>
 </Page>

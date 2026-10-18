@@ -20,15 +20,18 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Поиск по названию и комментарию"/>
-                <TextBox x:Name="TBoxSearch" Width="300" MaxLength="150" TextChanged="TBoxSearch_TextChanged"/>
+                <TextBox x:Name="TBoxSearch" Width="300" MaxLength="150" TextChanged="TBoxSearch_TextChanged"
+                         Tag="Например, Магнит" ToolTip="Таблица фильтруется во время ввода"/>
             </StackPanel>
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Категория"/>
-                <ComboBox x:Name="CBoxCategory" Width="180" SelectionChanged="Filter_SelectionChanged"/>
+                <ComboBox x:Name="CBoxCategory" Width="180" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Показать операции одной категории"/>
             </StackPanel>
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Тип"/>
-                <ComboBox x:Name="CBoxType" Width="120" SelectionChanged="Filter_SelectionChanged">
+                <ComboBox x:Name="CBoxType" Width="120" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Показать только доходы или только расходы">
                     <ComboBoxItem Content="Все"/>
                     <ComboBoxItem Content="Доход"/>
                     <ComboBoxItem Content="Расход"/>
@@ -36,7 +39,8 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="Сортировка"/>
-                <ComboBox x:Name="CBoxSort" Width="210" SelectionChanged="Filter_SelectionChanged">
+                <ComboBox x:Name="CBoxSort" Width="210" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Порядок строк. Можно также щёлкнуть по заголовку столбца">
                     <ComboBoxItem Content="Сначала новые"/>
                     <ComboBoxItem Content="Сначала старые"/>
                     <ComboBoxItem Content="Сумма по убыванию"/>
@@ -49,10 +53,10 @@
         <!-- Период и сброс фильтров -->
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label Content="Период с" VerticalAlignment="Center"/>
-            <DatePicker x:Name="DPickerFrom" Width="140" SelectedDateChanged="Filter_SelectionChanged"/>
+            <DatePicker x:Name="DPickerFrom" Width="140" SelectedDateChanged="Filter_SelectionChanged" ToolTip="Начало периода"/>
             <Label Content="по" VerticalAlignment="Center"/>
-            <DatePicker x:Name="DPickerTo" Width="140" SelectedDateChanged="Filter_SelectionChanged"/>
-            <Button Content="Сбросить фильтры" Margin="10,0,0,5" Click="BtnReset_Click"/>
+            <DatePicker x:Name="DPickerTo" Width="140" SelectedDateChanged="Filter_SelectionChanged" ToolTip="Конец периода"/>
+            <Button Content="Сбросить фильтры" Margin="10,0,0,5" Click="BtnReset_Click" ToolTip="Очистить поиск, фильтры и сортировку"/>
         </StackPanel>
 
         <DataGrid x:Name="DGridOperations" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">

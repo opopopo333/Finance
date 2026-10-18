@@ -19,15 +19,18 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Поиск по названию и комментарию"/>
-                <TextBox x:Name="TBoxSearch" Width="300" MaxLength="150" TextChanged="TBoxSearch_TextChanged"/>
+                <TextBox x:Name="TBoxSearch" Width="300" MaxLength="150" TextChanged="TBoxSearch_TextChanged"
+                         Tag="Например, Магнит" ToolTip="Таблица фильтруется во время ввода"/>
             </StackPanel>
             <StackPanel Margin="0,0,10,0">
                 <Label Content="Пользователь"/>
-                <ComboBox x:Name="CBoxUser" Width="180" SelectionChanged="Filter_SelectionChanged"/>
+                <ComboBox x:Name="CBoxUser" Width="180" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Показать операции одного пользователя"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Сортировка"/>
-                <ComboBox x:Name="CBoxSort" Width="210" SelectionChanged="Filter_SelectionChanged">
+                <ComboBox x:Name="CBoxSort" Width="210" SelectionChanged="Filter_SelectionChanged"
+                          ToolTip="Порядок строк. Можно также щёлкнуть по заголовку столбца">
                     <ComboBoxItem Content="Сначала новые"/>
                     <ComboBoxItem Content="Сначала старые"/>
                     <ComboBoxItem Content="Сумма по убыванию"/>
@@ -48,7 +51,7 @@
                 <DataGridTemplateColumn Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Click="BtnEdit_Click"/>
+                            <Button Content="Редактировать" Click="BtnEdit_Click" ToolTip="Изменить эту операцию"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -56,8 +59,9 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Content="Добавить" Margin="0,5,10,5" Click="BtnAdd_Click"/>
-            <Button Content="Удалить выбранные" Margin="0,5" Click="BtnDelete_Click"/>
+            <Button Content="Добавить" Margin="0,5,10,5" Click="BtnAdd_Click" ToolTip="Добавить новую операцию"/>
+            <Button Content="Удалить выбранные" Margin="0,5" Click="BtnDelete_Click"
+                    ToolTip="Удалить выделенные операции. Несколько строк выделяются с Ctrl или Shift"/>
         </StackPanel>
     </Grid>
 </Page>

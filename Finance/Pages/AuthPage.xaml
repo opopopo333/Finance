@@ -11,13 +11,17 @@
         <!-- Форма входа -->
         <StackPanel x:Name="SPanelLogin" Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Логин"/>
-            <TextBox x:Name="TBoxLogin" MaxLength="50"/>
+            <TextBox x:Name="TBoxLogin" MaxLength="50" Tag="Введите логин" ToolTip="Логин пользователя"/>
             <Label Content="Пароль"/>
-            <PasswordBox x:Name="PBoxPassword"/>
-            <Button Content="Войти" IsDefault="True" Margin="0,15,0,5" Click="BtnLogin_Click"/>
+            <!-- В Tag поля пароля лежит его подсказка, её прячет обработчик в App.xaml.cs -->
+            <Grid>
+                <PasswordBox x:Name="PBoxPassword" Tag="{Binding ElementName=TBlockPasswordHint}" ToolTip="Пароль пользователя"/>
+                <TextBlock x:Name="TBlockPasswordHint" Text="Введите пароль" Style="{DynamicResource HintStyle}"/>
+            </Grid>
+            <Button Content="Войти" IsDefault="True" Margin="0,15,0,5" Click="BtnLogin_Click" ToolTip="Войти в программу"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Регистрация" Click="BtnReg_Click"/>
-                <Button Content="Смена пароля" Click="BtnChangePass_Click"/>
+                <Button Content="Регистрация" Click="BtnReg_Click" ToolTip="Создать новую учётную запись"/>
+                <Button Content="Смена пароля" Click="BtnChangePass_Click" ToolTip="Сменить пароль учётной записи"/>
             </StackPanel>
         </StackPanel>
 
@@ -25,9 +29,11 @@
         <StackPanel x:Name="SPanelCaptcha" Width="340" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
             <Label Content="Введите символы с картинки"/>
             <TextBox x:Name="TBoxCaptcha" IsReadOnly="True" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="Captcha_PreviewExecuted"
-                     Height="50" FontSize="28" FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="TBoxCaptchaInput" MaxLength="6" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="Captcha_PreviewExecuted"/>
-            <Button Content="Подтвердить" IsDefault="True" Margin="0,15,0,5" Click="BtnCaptcha_Click"/>
+                     Height="50" FontSize="28" FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Center"
+                     ToolTip="Эти символы нужно ввести в поле ниже"/>
+            <TextBox x:Name="TBoxCaptchaInput" MaxLength="6" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="Captcha_PreviewExecuted"
+                     Tag="6 символов с картинки" ToolTip="Символы капчи с учётом регистра"/>
+            <Button Content="Подтвердить" IsDefault="True" Margin="0,15,0,5" Click="BtnCaptcha_Click" ToolTip="Проверить капчу"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -10,14 +10,25 @@
     <Grid>
         <StackPanel Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Логин"/>
-            <TextBox x:Name="TBoxLogin" MaxLength="50"/>
+            <TextBox x:Name="TBoxLogin" MaxLength="50" Tag="Введите логин" ToolTip="Логин пользователя"/>
+            <!-- В Tag полей пароля лежат их подсказки, их прячет обработчик в App.xaml.cs -->
             <Label Content="Текущий пароль"/>
-            <PasswordBox x:Name="PBoxOld"/>
+            <Grid>
+                <PasswordBox x:Name="PBoxOld" Tag="{Binding ElementName=TBlockOldHint}" ToolTip="Пароль, который действует сейчас"/>
+                <TextBlock x:Name="TBlockOldHint" Text="Введите текущий пароль" Style="{DynamicResource HintStyle}"/>
+            </Grid>
             <Label Content="Новый пароль"/>
-            <PasswordBox x:Name="PBoxNew"/>
+            <Grid>
+                <PasswordBox x:Name="PBoxNew" Tag="{Binding ElementName=TBlockNewHint}"
+                             ToolTip="Не короче 6 символов, только латиница и цифры, хотя бы одна цифра"/>
+                <TextBlock x:Name="TBlockNewHint" Text="Не короче 6 символов" Style="{DynamicResource HintStyle}"/>
+            </Grid>
             <Label Content="Подтверждение пароля"/>
-            <PasswordBox x:Name="PBoxConfirm"/>
-            <Button Content="Сменить пароль" IsDefault="True" Margin="0,15,0,5" Click="BtnChange_Click"/>
+            <Grid>
+                <PasswordBox x:Name="PBoxConfirm" Tag="{Binding ElementName=TBlockConfirmHint}" ToolTip="Введите новый пароль ещё раз"/>
+                <TextBlock x:Name="TBlockConfirmHint" Text="Повторите новый пароль" Style="{DynamicResource HintStyle}"/>
+            </Grid>
+            <Button Content="Сменить пароль" IsDefault="True" Margin="0,15,0,5" Click="BtnChange_Click" ToolTip="Сохранить новый пароль"/>
         </StackPanel>
     </Grid>
 </Page>

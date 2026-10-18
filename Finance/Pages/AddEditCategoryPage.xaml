@@ -10,13 +10,13 @@
     <Grid>
         <StackPanel Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Название"/>
-            <TextBox x:Name="TBoxName" MaxLength="100"/>
+            <TextBox x:Name="TBoxName" MaxLength="100" Tag="Например, Продукты" ToolTip="Название категории, не длиннее 100 символов"/>
             <Label Content="Тип"/>
-            <ComboBox x:Name="CBoxType" SelectedIndex="0">
+            <ComboBox x:Name="CBoxType" SelectedIndex="0" ToolTip="Операции этой категории считаются доходом или расходом">
                 <ComboBoxItem Content="Доход"/>
                 <ComboBoxItem Content="Расход"/>
             </ComboBox>
-            <Button Content="Сохранить" IsDefault="True" Margin="0,15,0,5" Click="BtnSave_Click"/>
+            <Button Content="Сохранить" IsDefault="True" Margin="0,15,0,5" Click="BtnSave_Click" ToolTip="Проверить данные и сохранить"/>
         </StackPanel>
     </Grid>
 </Page>

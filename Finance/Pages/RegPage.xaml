@@ -10,20 +10,29 @@
     <Grid>
         <StackPanel Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Логин"/>
-            <TextBox x:Name="TBoxLogin" MaxLength="50"/>
+            <TextBox x:Name="TBoxLogin" MaxLength="50" Tag="Латиница, цифры и _"
+                     ToolTip="От 3 до 50 символов: латинские буквы, цифры и _"/>
             <Label Content="Пароль"/>
-            <PasswordBox x:Name="PBoxPassword"/>
+            <!-- В Tag поля пароля лежит его подсказка, её прячет обработчик в App.xaml.cs -->
+            <Grid>
+                <PasswordBox x:Name="PBoxPassword" Tag="{Binding ElementName=TBlockPasswordHint}"
+                             ToolTip="Не короче 6 символов, только латиница и цифры, хотя бы одна цифра"/>
+                <TextBlock x:Name="TBlockPasswordHint" Text="Не короче 6 символов" Style="{DynamicResource HintStyle}"/>
+            </Grid>
             <Label Content="Подтверждение пароля"/>
-            <PasswordBox x:Name="PBoxConfirm"/>
+            <Grid>
+                <PasswordBox x:Name="PBoxConfirm" Tag="{Binding ElementName=TBlockConfirmHint}" ToolTip="Введите пароль ещё раз"/>
+                <TextBlock x:Name="TBlockConfirmHint" Text="Повторите пароль" Style="{DynamicResource HintStyle}"/>
+            </Grid>
             <Label Content="ФИО"/>
-            <TextBox x:Name="TBoxFIO" MaxLength="150"/>
+            <TextBox x:Name="TBoxFIO" MaxLength="150" Tag="Иванов Иван Иванович" ToolTip="Русские буквы, пробел и дефис"/>
             <Label Content="Роль"/>
             <!-- В Tag лежит значение для столбца Users.Role -->
-            <ComboBox x:Name="CBoxRole" SelectedIndex="0">
+            <ComboBox x:Name="CBoxRole" SelectedIndex="0" ToolTip="Роль нового пользователя">
                 <ComboBoxItem Content="Пользователь" Tag="User"/>
                 <ComboBoxItem Content="Администратор" Tag="Admin"/>
             </ComboBox>
-            <Button Content="Зарегистрироваться" IsDefault="True" Margin="0,15,0,5" Click="BtnReg_Click"/>
+            <Button Content="Зарегистрироваться" IsDefault="True" Margin="0,15,0,5" Click="BtnReg_Click" ToolTip="Проверить данные и создать пользователя"/>
         </StackPanel>
     </Grid>
 </Page>

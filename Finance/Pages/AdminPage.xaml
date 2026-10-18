@@ -9,11 +9,11 @@
       Title="Панель администратора">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Пользователи" Click="BtnUsers_Click"/>
-            <Button Content="Категории" Click="BtnCategories_Click"/>
-            <Button Content="Операции" Click="BtnOperations_Click"/>
-            <Button Content="Диаграмма" Click="BtnDiagram_Click"/>
-            <Button Content="Отчёты" Click="BtnReports_Click"/>
+            <Button Content="Пользователи" Click="BtnUsers_Click" ToolTip="Просмотр, добавление, правка и удаление пользователей"/>
+            <Button Content="Категории" Click="BtnCategories_Click" ToolTip="Просмотр, добавление, правка и удаление категорий"/>
+            <Button Content="Операции" Click="BtnOperations_Click" ToolTip="Операции всех пользователей: поиск, фильтр, правка"/>
+            <Button Content="Диаграмма" Click="BtnDiagram_Click" ToolTip="Суммы операций пользователя по категориям"/>
+            <Button Content="Отчёты" Click="BtnReports_Click" ToolTip="Выгрузка отчёта в Word, PDF и Excel"/>
         </StackPanel>
     </Grid>
 </Page>
