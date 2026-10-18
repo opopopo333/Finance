@@ -29,6 +29,11 @@ namespace Finance.Pages
             InitializeComponent();
             currentOperation = operation;
 
+            // В сумму только цифры и одна запятая, вставка из буфера запрещена
+            TBoxAmount.PreviewTextInput += InputMask.Amount;
+            TBoxAmount.PreviewKeyDown += InputMask.NoSpace;
+            CommandManager.AddPreviewExecutedHandler(TBoxAmount, InputMask.NoPaste);
+
             CBoxUser.ItemsSource = Core.Context.Users.OrderBy(u => u.Login).ToList();
             CBoxCategory.ItemsSource = Core.Context.Category.OrderBy(c => c.Name).ToList();
 
@@ -68,6 +73,8 @@ namespace Finance.Pages
                 errors.AppendLine("Сумма должна быть числом, например 1500,50");
             else if (amount < 0.01m || amount > 10000000)
                 errors.AppendLine("Сумма должна быть от 0,01 до 10 000 000");
+            else if (amount != Math.Round(amount, 2))
+                errors.AppendLine("В сумме не больше двух знаков после запятой");
             if (errors.Length > 0)
             {
                 Msg.Warning(errors.ToString());

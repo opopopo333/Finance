@@ -29,6 +29,11 @@ namespace Finance.Pages
             InitializeComponent();
             currentUser = user;
 
+            // Ограничения ввода
+            TBoxLogin.PreviewTextInput += InputMask.Login;
+            TBoxLogin.PreviewKeyDown += InputMask.NoSpace;
+            TBoxFIO.PreviewTextInput += InputMask.FIO;
+
             if (user != null)
             {
                 Title = "Редактирование пользователя";
@@ -54,12 +59,13 @@ namespace Finance.Pages
                 id = currentUser.ID;
 
             StringBuilder errors = new StringBuilder();
-            if (login == "")
-                errors.AppendLine("Введите логин");
-            else if (Core.Context.Users.Any(u => u.Login == login && u.ID != id))
+            errors.Append(AuthService.CheckLogin(login));
+            if (Core.Context.Users.Any(u => u.Login == login && u.ID != id))
                 errors.AppendLine("Пользователь с таким логином уже существует");
             if (fio == "")
                 errors.AppendLine("Введите ФИО");
+            else
+                errors.Append(AuthService.CheckFIO(fio));
             // При редактировании пустой пароль значит «не менять»
             if (currentUser == null || password != "")
                 errors.Append(AuthService.CheckPassword(password));

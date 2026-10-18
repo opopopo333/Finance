@@ -182,6 +182,7 @@
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\ExportService.cs" />
+    <Compile Include="Services\InputMask.cs" />
     <Compile Include="Services\Msg.cs" />
     <Compile Include="Services\PasswordHasher.cs" />
     <Compile Include="Services\ThemeManager.cs" />

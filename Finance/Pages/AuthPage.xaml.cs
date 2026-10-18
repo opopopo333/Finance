@@ -27,6 +27,10 @@ namespace Finance.Pages
         public AuthPage()
         {
             InitializeComponent();
+
+            // Ограничения ввода
+            TBoxLogin.PreviewTextInput += InputMask.Login;
+            TBoxLogin.PreviewKeyDown += InputMask.NoSpace;
         }
 
         // Вход: проверка полей, поиск пользователя и переход по роли

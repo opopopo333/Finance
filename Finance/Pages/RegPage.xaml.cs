@@ -24,6 +24,11 @@ namespace Finance.Pages
         public RegPage()
         {
             InitializeComponent();
+
+            // Ограничения ввода
+            TBoxLogin.PreviewTextInput += InputMask.Login;
+            TBoxLogin.PreviewKeyDown += InputMask.NoSpace;
+            TBoxFIO.PreviewTextInput += InputMask.FIO;
         }
 
         // Регистрация: проверка полей и сохранение нового пользователя
@@ -40,8 +45,10 @@ namespace Finance.Pages
 
             // Все ошибки собираются и выводятся одним сообщением
             StringBuilder errors = new StringBuilder();
+            errors.Append(AuthService.CheckLogin(login));
             if (!AuthService.IsLoginFree(login))
                 errors.AppendLine("Пользователь с таким логином уже существует");
+            errors.Append(AuthService.CheckFIO(fio));
             errors.Append(AuthService.CheckPassword(PBoxPassword.Password));
             if (PBoxPassword.Password != PBoxConfirm.Password)
                 errors.AppendLine("Пароли не совпадают");

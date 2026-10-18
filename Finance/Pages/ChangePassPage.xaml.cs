@@ -24,6 +24,10 @@ namespace Finance.Pages
         public ChangePassPage()
         {
             InitializeComponent();
+
+            // Ограничения ввода
+            TBoxLogin.PreviewTextInput += InputMask.Login;
+            TBoxLogin.PreviewKeyDown += InputMask.NoSpace;
         }
 
         // Смена пароля: проверка полей, сохранение и возврат на авторизацию

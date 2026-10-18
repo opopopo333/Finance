@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +23,22 @@ namespace Finance.Services
         public static bool IsLoginFree(string login)
         {
             return !Core.Context.Users.Any(u => u.Login == login);
+        }
+
+        // Логин от 3 до 50 символов: латинские буквы, цифры и _. Возвращает текст ошибки или пустую строку
+        public static string CheckLogin(string login)
+        {
+            if (!Regex.IsMatch(login, "^[a-zA-Z0-9_]{3,50}$"))
+                return "Логин должен быть от 3 до 50 символов: латинские буквы, цифры и _" + Environment.NewLine;
+            return "";
+        }
+
+        // ФИО только из русских букв, пробелов и дефисов. Возвращает текст ошибки или пустую строку
+        public static string CheckFIO(string fio)
+        {
+            if (!Regex.IsMatch(fio, "^[а-яА-ЯёЁ -]+$"))
+                return "ФИО может содержать только русские буквы, пробел и дефис" + Environment.NewLine;
+            return "";
         }
 
         // Проверка правил пароля, возвращает текст ошибок или пустую строку
