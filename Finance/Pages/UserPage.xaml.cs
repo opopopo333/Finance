@@ -112,5 +112,46 @@ namespace Finance.Pages
         {
             ResetFilters();
         }
+
+        // После возврата со страницы добавления или правки данные перечитываются из БД
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (IsVisible)
+            {
+                Core.Context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                UpdateOperations();
+            }
+        }
+
+        // Добавление: страница открывается без операции
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditOperationPage(null));
+        }
+
+        // Редактирование операции из строки, где нажата кнопка
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Operation operation = (Operation)((Button)sender).DataContext;
+            NavigationService.Navigate(new AddEditOperationPage(operation));
+        }
+
+        // Удаление выбранных операций после подтверждения
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            List<Operation> operations = DGridOperations.SelectedItems.Cast<Operation>().ToList();
+            if (operations.Count == 0)
+            {
+                Msg.Warning("Выберите операции для удаления");
+                return;
+            }
+            if (!Msg.Confirm("Удалить выбранные операции (" + operations.Count + ")?"))
+                return;
+
+            Core.Context.Operation.RemoveRange(operations);
+            Core.Context.SaveChanges();
+            Msg.Info("Операции удалены");
+            UpdateOperations();
+        }
     }
 }

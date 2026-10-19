@@ -9,10 +9,19 @@
       Title="Добавление операции">
     <Grid>
         <StackPanel Width="340" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Пользователь"/>
+            <Label x:Name="LblUser" Content="Пользователь"/>
             <ComboBox x:Name="CBoxUser" DisplayMemberPath="Login" ToolTip="Чья это операция"/>
             <Label Content="Категория"/>
-            <ComboBox x:Name="CBoxCategory" DisplayMemberPath="Name" ToolTip="Категория определяет, доход это или расход"/>
+            <!-- Рядом с названием категории виден её тип; поиск по первым буквам идёт по названию -->
+            <ComboBox x:Name="CBoxCategory" TextSearch.TextPath="Name" ToolTip="Категория определяет, доход это или расход">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Name, Mode=OneWay}"/> (<Run Text="{Binding Type, Mode=OneWay}"/>)
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Label Content="Дата"/>
             <DatePicker x:Name="DPickerDate" ToolTip="Дата операции, не позже сегодняшней"/>
             <Label Content="Название"/>

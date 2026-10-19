@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Finance.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Мои операции" Language="ru-RU">
+      Title="Мои операции" Language="ru-RU" IsVisibleChanged="Page_IsVisibleChanged">
     <!-- Language нужен, чтобы суммы в таблице выводились с запятой, как в итогах -->
     <Grid Margin="10,0">
         <Grid.RowDefinitions>
@@ -67,10 +67,22 @@
                 <DataGridTextColumn Header="Тип" Binding="{Binding Category.Type}" Width="90"/>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding Amount, StringFormat=N2}" Width="120"/>
                 <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*"/>
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Click="BtnEdit_Click" ToolTip="Изменить эту операцию"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Итоги по операциям в таблице -->
-        <TextBlock x:Name="TBlockTotals" Grid.Row="3" Margin="0,5" FontSize="16"/>
+        <!-- Кнопки слева, итоги по операциям в таблице справа -->
+        <DockPanel Grid.Row="3">
+            <Button Content="Добавить" Margin="0,5,10,5" Click="BtnAdd_Click" ToolTip="Записать новый доход или расход"/>
+            <Button Content="Удалить выбранные" Margin="0,5" Click="BtnDelete_Click"
+                    ToolTip="Удалить выделенные операции. Несколько строк выделяются с Ctrl или Shift"/>
+            <TextBlock x:Name="TBlockTotals" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16"/>
+        </DockPanel>
     </Grid>
 </Page>

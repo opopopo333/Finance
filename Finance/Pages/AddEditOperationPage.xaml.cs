@@ -34,7 +34,16 @@ namespace Finance.Pages
             TBoxAmount.PreviewKeyDown += InputMask.NoSpace;
             CommandManager.AddPreviewExecutedHandler(TBoxAmount, InputMask.NoPaste);
 
-            CBoxUser.ItemsSource = Core.Context.Users.OrderBy(u => u.Login).ToList();
+            // Администратор выбирает пользователя, обычный пользователь ведёт только свои операции
+            if (AuthService.CurrentUser.Role == "Admin")
+                CBoxUser.ItemsSource = Core.Context.Users.OrderBy(u => u.Login).ToList();
+            else
+            {
+                CBoxUser.ItemsSource = new List<Users> { AuthService.CurrentUser };
+                CBoxUser.SelectedIndex = 0;
+                LblUser.Visibility = Visibility.Collapsed;
+                CBoxUser.Visibility = Visibility.Collapsed;
+            }
             CBoxCategory.ItemsSource = Core.Context.Category.OrderBy(c => c.Name).ToList();
 
             if (operation == null)
